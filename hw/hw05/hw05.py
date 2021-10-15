@@ -110,6 +110,7 @@ class Mint:
         "*** YOUR CODE HERE ***"
         self.year = self.current_year
 
+
 class Coin:
     def __init__(self, year):
         self.year = year
