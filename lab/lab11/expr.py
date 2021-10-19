@@ -107,6 +107,10 @@ class Name(Expr):
         None
         """
         "*** YOUR CODE HERE ***"
+        if env.get(self.var_name):
+            return env[self.var_name]
+        else:
+            return None
 
     def __str__(self):
         return self.var_name
@@ -173,6 +177,13 @@ class CallExpr(Expr):
         Number(14)
         """
         "*** YOUR CODE HERE ***"
+        c_operator = self.operator.eval(env)
+        c_operands = [op.eval(env) for op in self.operands]
+        # print("DEBUG:", f"operator: {c_operator}, operands: {c_operands}")
+        if isinstance(c_operator, (PrimitiveFunction, LambdaFunction)):
+            return c_operator.apply(c_operands)
+        else:
+            return c_operator.eval(c_operands)
 
     def __str__(self):
         function = str(self.operator)
@@ -282,6 +293,11 @@ class LambdaFunction(Value):
             raise TypeError("Oof! Cannot apply number {} to arguments {}".format(
                 comma_separated(self.parameters), comma_separated(arguments)))
         "*** YOUR CODE HERE ***"
+        env = self.parent.copy()
+        for param, arg in zip(self.parameters, arguments):
+            env[param] = arg
+        # print("DEBUG:", f"operator: {self.body}, operands: {arguments}, env: {env}")
+        return self.body.eval(env)
 
     def __str__(self):
         definition = LambdaExpr(self.parameters, self.body)
