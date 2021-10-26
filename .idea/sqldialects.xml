@@ -4,5 +4,6 @@
     <file url="file://$PROJECT_DIR$/lab/lab12/fa19data.sql" dialect="SQLite" />
     <file url="file://$PROJECT_DIR$/lab/lab12/lab12.sql" dialect="SQLite" />
     <file url="file://$PROJECT_DIR$/lab/lab12/lab12_extra.sql" dialect="SQLite" />
+    <file url="PROJECT" dialect="SQLite" />
   </component>
 </project>
